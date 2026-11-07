@@ -8,7 +8,7 @@ In the ChatGPT app, open **Codex**, start a new task with your **home folder** a
 
 ```
 Clone https://github.com/jbellsolutions/chris-aios into ~/chris-aios. If ~/chris-aios already exists, don't overwrite it: run git pull inside it instead.
-If Codex asks to allow network access for this, I'll click Allow.
+If Codex asks to allow network access for this, I'll click Allow. If it can't reach github.com and doesn't offer that, tell me to use the Download ZIP route on the link instead.
 If my Mac asks to install the Command Line Tools, tell me to click Install, wait for it to finish, then try again.
 When ~/chris-aios/AGENTS.md exists, tell me: "Done. Now start a new Codex task in ~/chris-aios and say: set up my AIOS."
 ```
