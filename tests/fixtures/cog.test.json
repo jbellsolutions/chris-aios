@@ -1,0 +1,74 @@
+{
+ "_readme": "Test and demo config: invented reps, invented IDs. Never Chris's real team.",
+ "business": {
+  "name": "Circle of Greatness",
+  "team_timezone": "America/New_York",
+  "selling_days": [
+   "Mon",
+   "Tue",
+   "Wed",
+   "Thu",
+   "Fri",
+   "Sat"
+  ]
+ },
+ "roster": [
+  {
+   "name": "Demo Closer A",
+   "role": "closer",
+   "slack_member_id": "U000000AAA",
+   "active": true,
+   "eod_required": true,
+   "active_since": "2026-10-01"
+  },
+  {
+   "name": "Demo Closer B",
+   "role": "closer",
+   "slack_member_id": "U000000BBB",
+   "active": true,
+   "eod_required": true,
+   "active_since": "2026-10-01"
+  },
+  {
+   "name": "Demo Closer C",
+   "role": "closer",
+   "slack_member_id": "U000000CCC",
+   "email": "c@example.com",
+   "active": true,
+   "eod_required": true,
+   "active_since": "2026-10-01"
+  },
+  {
+   "name": "Demo Setter D",
+   "role": "setter",
+   "slack_member_id": "U000000DDD",
+   "active": true,
+   "eod_required": true,
+   "active_since": "2026-10-01"
+  },
+  {
+   "name": "Demo New Hire",
+   "role": "closer",
+   "slack_member_id": "U000000EEE",
+   "active": true,
+   "eod_required": true,
+   "active_since": "2026-11-10"
+  }
+ ],
+ "eod": {
+  "slack_channel_id": "C000TEST01",
+  "identity_column": "Name",
+  "first_check": "23:30",
+  "final_check": "00:45",
+  "cutoff": "01:00",
+  "source_type": "slack_workflow_channel"
+ },
+ "bump": {
+  "template_first": "{mentions} EOD KPIs are missing for {report_date}. It's {time} ET. Please submit now. Cutoff is {cutoff} ET.",
+  "template_final": "{mentions} final call: EOD KPIs for {report_date} are still missing. Cutoff is {cutoff} ET."
+ },
+ "owner": {
+  "name": "Owner",
+  "slack_member_id": "U000000OWN"
+ }
+}

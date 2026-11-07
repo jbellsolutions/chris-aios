@@ -1,0 +1,196 @@
+{
+  "_readme": "Chief copies this to context/cog.json and fills it in during the intake (config/intake-interview.md). Every value marked REQUIRED must be real before any COG routine is switched on; a routine that finds one missing replies NO_CLIENT_SOURCE and stops. No passwords, tokens or API keys belong in this file.",
+  "schema_version": 1,
+  "business": {
+    "name": "Circle of Greatness",
+    "short": "COG",
+    "team_timezone": "America/New_York",
+    "selling_days": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "selling_hours": {
+      "start": "09:00",
+      "end": "22:00"
+    },
+    "_timezone_note": "Reports and schedules are Eastern (Chris chose Eastern Daylight on Oct 16). Codex automations run on Chris's Mac in its time zone; keep the Mac on Eastern (a UTC−5 zone with no daylight saving matches Eastern from November to March)."
+  },
+  "owner": {
+    "name": "Chris",
+    "slack_member_id": "REQUIRED e.g. U0123456789",
+    "report_channel": "chat",
+    "_report_channel_note": "chat = each bot's own chat with Chris in Codex (the default).",
+    "phone_alerts": false
+  },
+  "roster": [
+    {
+      "name": "EXAMPLE Closer (replace)",
+      "role": "closer",
+      "slack_member_id": "REQUIRED",
+      "ghl_user_id": "REQUIRED",
+      "calendar_id": "REQUIRED (Google or GHL calendar id)",
+      "eod_required": true,
+      "active_since": "2026-10-01",
+      "active": true
+    },
+    {
+      "name": "EXAMPLE Setter (replace)",
+      "role": "setter",
+      "slack_member_id": "REQUIRED",
+      "ghl_user_id": "REQUIRED",
+      "calendar_id": null,
+      "eod_required": true,
+      "active_since": "2026-10-01",
+      "active": true
+    }
+  ],
+  "eod": {
+    "source_type": "REQUIRED one of: google_sheet | slack_workflow_channel | ghl_form | other",
+    "google_sheet": {
+      "spreadsheet_id": null,
+      "tab": null,
+      "header_row": 1
+    },
+    "slack_channel_id": "REQUIRED (the KPI channel the bot reads and, once Chris gives standing approval 1 at M4, posts the EOD bump in)",
+    "source_type_note": "This tool reads Slack (slack_workflow_channel). A Google Sheet or GHL form needs its own reader first.",
+    "slack_workspace": "REQUIRED: the Slack workspace the KPI channel is in (WeScale or COG's own). Decides which Slack connection reads it.",
+    "identity_column": "REQUIRED (the form field that says which rep submitted, e.g. 'Name' or 'Email')",
+    "timestamp_column": "REQUIRED (e.g. 'Timestamp')",
+    "report_date_rule": "submissions before cutoff count for the previous selling day",
+    "first_check": "23:30",
+    "final_check": "00:45",
+    "cutoff": "01:00",
+    "field_map": {
+      "_comment": "Left side = standard field (docs/KPI-DEFINITIONS.md). Right side = the exact column/question name in Chris's form. Use null for fields his form does not have.",
+      "calls_booked": null,
+      "calls_scheduled": null,
+      "live_calls": null,
+      "no_shows": null,
+      "reschedules": null,
+      "cancellations": null,
+      "offers_made": null,
+      "closes": null,
+      "deposits": null,
+      "cash_collected": null,
+      "revenue_contracted": null,
+      "refunds": null,
+      "follow_ups_set": null,
+      "dials": null,
+      "conversations": null,
+      "notes": null
+    }
+  },
+  "ghl": {
+    "location_id": "REQUIRED",
+    "connection": "GoHighLevel API with a read-only private-integration token in .env.local as GHL_TOKEN (START-HERE Step 6). The token is never written in this file.",
+    "calendars": [
+      "REQUIRED"
+    ],
+    "appointment_status_map": {
+      "_comment": "Map GHL appointment statuses / outcomes to standard ones.",
+      "showed": [
+        "showed"
+      ],
+      "no_show": [
+        "noshow",
+        "no-show"
+      ],
+      "cancelled": [
+        "cancelled"
+      ],
+      "rescheduled": [],
+      "confirmed": [
+        "confirmed"
+      ]
+    },
+    "dispositions": {
+      "_comment": "The exact disposition names the team must use (pipeline stage, custom field or tag). Fill from Chris's SOP.",
+      "field": "REQUIRED e.g. custom field 'Call Outcome' or opportunity stage",
+      "allowed": [
+        "REQUIRED e.g. Closed Won",
+        "Deposit",
+        "Follow Up",
+        "No Show",
+        "Not Qualified",
+        "Lost"
+      ]
+    }
+  },
+  "no_show_sop": {
+    "window_minutes": 10,
+    "steps": [
+      {
+        "id": "call_1",
+        "label": "Call attempt #1",
+        "evidence": "outbound call in GHL to the lead"
+      },
+      {
+        "id": "call_2",
+        "label": "Call attempt #2",
+        "evidence": "second outbound call in GHL"
+      },
+      {
+        "id": "text",
+        "label": "Text message",
+        "evidence": "outbound SMS in GHL conversation"
+      },
+      {
+        "id": "setter_notified",
+        "label": "Setter notified",
+        "evidence": "Slack message/thread mentioning the setter or lead, or GHL note/task"
+      },
+      {
+        "id": "ghl_updated",
+        "label": "GHL notes/disposition updated",
+        "evidence": "appointment status = no_show and disposition set"
+      }
+    ]
+  },
+  "targets": {
+    "_comment": "Optional. Leave null if Chris has none yet; the report then shows trend vs. prior period instead of vs. target.",
+    "daily_team": {
+      "cash_collected": null,
+      "closes": null,
+      "live_calls": null,
+      "show_rate": null,
+      "close_rate": null
+    },
+    "weekly_team": {
+      "cash_collected": null,
+      "closes": null
+    },
+    "per_closer_daily": {
+      "live_calls": null,
+      "closes": null
+    }
+  },
+  "thresholds": {
+    "kpi_vs_ghl_live_call_mismatch": 1,
+    "late_eod_minutes": 0,
+    "repeat_offender_window_days": 30,
+    "repeat_offender_count": 3,
+    "lead_response_minutes": 5
+  },
+  "bump": {
+    "template_first": "{mentions} — EOD KPIs are missing for {report_date}. It's {time} ET. Please submit now. Cutoff is {cutoff} ET.",
+    "template_final": "{mentions} — final call: EOD KPIs for {report_date} are still missing. Cutoff is {cutoff} ET."
+  },
+  "calls": {
+    "transcript_source": "REQUIRED for Growth Operator: ghl_recordings | zoom | read_ai | fathom | other",
+    "drafts_folder": "Codex Drafts"
+  },
+  "knowledge": {
+    "jeremy_haynes_kb_url": "REQUIRED for Pre-Call Concierge (the repo / here.now page built on Oct 16)",
+    "sops_folder": null,
+    "content_library_folder": null
+  },
+  "vault": {
+    "path": "vault",
+    
+    "_note": "The vault is ~/chris-aios/vault on Chris's Mac; Chris opens it in Obsidian."
+  }
+}

@@ -1,0 +1,33 @@
+{
+ "_readme": "Invented demo channel for Fri Nov 6, 2026. Not real people.",
+ "messages": [
+  {
+   "ts": "1794017400.000000",
+   "bot_id": "B0WORKFLOW",
+   "subtype": "bot_message",
+   "text": "*EOD KPI Report*\nName: Demo Closer A\nLive calls: 5\nCloses: 1\nCash collected: 3000"
+  },
+  {
+   "ts": "1794020700.000000",
+   "user": "U000000BBB",
+   "text": "EOD KPIs\nLive calls: 4\nCloses: 0"
+  },
+  {
+   "ts": "1794022800.000000",
+   "bot_id": "B0WORKFLOW",
+   "subtype": "bot_message",
+   "text": "*EOD KPI Report*\nName: Jon S.\nLive calls: 3"
+  },
+  {
+   "ts": "1794027000.000000",
+   "bot_id": "B0WORKFLOW",
+   "subtype": "bot_message",
+   "text": "*EOD KPI Report*\nName: c@example.com\nLive calls: 6\nCloses: 2"
+  },
+  {
+   "ts": "1793995200.000000",
+   "user": "U000000DDD",
+   "text": "anyone got the new script?"
+  }
+ ]
+}

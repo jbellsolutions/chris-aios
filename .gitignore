@@ -1,0 +1,45 @@
+# Secrets
+.env*
+!.env.example
+# Chris's private context and live state: never in git
+context/*
+!context/README.md
+queue/*
+!queue/README.md
+runs/*
+!runs/README.md
+state/*
+!state/README.md
+data/*
+!data/README.md
+vault/*
+!vault/Home.md
+!vault/README.md
+!vault/*/
+vault/*/*
+!vault/*/.gitkeep
+daily/
+log/
+requests/
+libraries/
+approved/
+# Life side: only its rules and skills are in git
+life/*
+!life/AGENTS.md
+!life/.agents/
+# Peptide template: anything made at runtime stays local
+peptide/*
+!peptide/AGENTS.md
+!peptide/OFFER.md
+!peptide/DELIVERY.md
+!peptide/COMPLIANCE.md
+!peptide/agents/
+!peptide/automations/
+!peptide/.agents/
+!peptide/vault/
+peptide/vault/*
+!peptide/vault/README.md
+# Mac and Python noise
+.DS_Store
+__pycache__/
+*.pyc
